@@ -7,6 +7,11 @@
     "type": "git",
     "url": "https://github.com/Rademade/prerender"
   },
+  "scripts": {
+    "install": "",
+    "test": "node test/index.js",
+    "start": "node server.js"
+  },
   "dependencies": {
     "forever": "^0.15.1",
     "prerender": "^3.20.1",
