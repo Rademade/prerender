@@ -21,8 +21,8 @@ namespace :deploy do
   task 'app:restart' do
     on roles(:web) do
       within current_path do
-        execute "kill $(ps aux | grep 'Prerender' | awk '{print $2}')"
-        execute "cd #{current_path} && APP=Prerender && PORT=4554 node_modules/.bin/forever start server.js >> /dev/null 2>&1"
+        execute "kill $(ps aux | grep 'prerender' | awk '{print $2}')"
+        execute "cd #{current_path} && APP=prerender && PORT=4554 node_modules/.bin/forever start server.js >> /dev/null 2>&1"
       end
     end
   end
