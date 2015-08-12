@@ -1,0 +1,14 @@
+{
+  "author": "Rademade",
+  "name": "rademade-prerender",
+  "description": "Deploy ready project",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Rademade/prerender"
+  },
+  "dependencies": {
+    "prerender": "^3.20.1",
+    "forever": "^0.15.1"
+  }
+}
