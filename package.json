@@ -10,6 +10,6 @@
   "dependencies": {
     "forever": "^0.15.1",
     "prerender": "^3.20.1",
-    "prerender-mongodb-cache": "git@github.com:brainshave/prerender-mongodb-cache.git" 
+    "prerender-mongodb-cache": "https://github.com/brainshave/prerender-mongodb-cache#c863fce49299e16ba6dd3a3712a5da120905c3f0"
   }
 }

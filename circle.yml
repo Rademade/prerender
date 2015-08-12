@@ -15,4 +15,3 @@ deployment:
     commands:
       - bundle exec cap rademade deploy
       - bundle exec cap ob deploy
-         timeout: 1800
