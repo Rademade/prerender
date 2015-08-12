@@ -28,7 +28,7 @@ namespace :deploy do
   end
 
   after :updated, 'deploy:npm:install'
-  after :updated, 'deploy:app:restart'
+  after :finishing, 'deploy:app:restart'
   after :finishing, 'deploy:cleanup'
 
 end
