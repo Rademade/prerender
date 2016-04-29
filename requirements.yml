@@ -1,0 +1,5 @@
+- src: https://github.com/dstil/ansible-locales.git
+- src: yatesr.timezone
+- src: geerlingguy.git
+- src: https://github.com/UnderGreen/ansible-role-mongodb.git
+- src: https://github.com/pablocrivella/ansible-role-nvm.git

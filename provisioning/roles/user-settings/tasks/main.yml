@@ -1,0 +1,66 @@
+---
+- name: Create rvm group
+  group: name=rvm state=present
+
+- name: Add deploy user
+  user: name={{project_user}} shell=/bin/bash groups=rvm,www-data
+
+# Generate keys
+
+- name: Add ssh-keys directory
+  file: path=/home/{{project_user}}/.ssh/ssh-keys state=directory recurse=yes owner={{project_user}} group={{project_user}}
+
+# TODO extract path variables for backend and frontend
+
+- stat: path=/home/{{project_user}}/.ssh/ssh-keys/frontend
+  register: frontend_key
+
+- name: Generate frontend key
+  command: ssh-keygen -N '' -f /home/{{project_user}}/.ssh/ssh-keys/frontend
+  when: frontend_key.stat.exists == False
+
+- stat: path=/home/{{project_user}}/.ssh/ssh-keys/backend
+  register: backend_key
+
+- name: Generate backend key
+  command: ssh-keygen -N '' -f /home/{{project_user}}/.ssh/ssh-keys/backend
+  when: backend_key.stat.exists == False
+
+- name: Add deploy checkout keys
+  template:
+    src: ssh-config
+    dest: "/home/{{project_user}}/.ssh/config"
+
+# Update permisions
+
+- name: Setup ssh directories owner
+  command: chown -R {{project_user}}:{{project_user}} /home/{{project_user}}/.ssh
+
+- name: Setup ssh directories permisions
+  command: find /home/{{project_user}}/.ssh -type d -exec chmod 700 {} \;
+
+- name: Setup ssh files permisions
+  command: find /home/{{project_user}}/.ssh -type f -exec chmod 600 {} \;
+
+# Update settings
+
+- name: Update deploy user authorized_key
+  authorized_key: user={{project_user}} key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+- name: Update nginx groups
+  user: name=nginx groups={{project_user}}
+
+- name: Update bashrc
+  blockinfile:
+    dest: /home/{{project_user}}/.bashrc
+    insertbefore: "# If not running interactively, don't do anything"
+    content: |
+      # Locales
+      export LC_ALL=""
+      export LC_COLLATE=C
+      export LANG=en_EN.UTF-8
+      export LC_ALL="en_GB.utf8"
+
+      # Load NVM
+      export NVM_DIR="/usr/local/nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"

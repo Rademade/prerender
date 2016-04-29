@@ -1,0 +1,7 @@
+---
+# TODO update rvm1 role. Need auto install gemset
+- name: Add gemset
+  command: "{{ rvm1_rvm }} {{ rvm1_ruby }} do rvm gemset create {{ rvm1_gemset }}"
+
+- name: Add bundler
+  command: "{{ rvm1_rvm }} {{ rvm1_ruby }}@{{ rvm1_gemset }} do gem install bundler"

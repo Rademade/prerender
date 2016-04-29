@@ -1,0 +1,9 @@
+Host github.com-backend
+  HostName github.com
+  IdentityFile ~/.ssh/ssh-keys/backend
+  User git
+
+Host github.com-frontend
+  HostName github.com
+  IdentityFile ~/.ssh/ssh-keys/frontend
+  User git

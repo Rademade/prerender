@@ -3,7 +3,7 @@ lock '3.4.0'
 set :application, 'Prerender'
 
 set :scm, :git
-set :repo_url, 'git@github.com:Rademade/prerender.git'
+set :repo_url, 'https://github.com/Rademade/prerender.git'
 
 set :linked_dirs, %w{bower_components node_modules}
 set :keep_releases, 2

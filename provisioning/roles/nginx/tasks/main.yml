@@ -1,0 +1,51 @@
+---
+- name: Apt | Add key for passenger repos
+  apt_key: keyserver=keyserver.ubuntu.com id=561F9B9CAC40B2F7 state=present
+
+- name: Apt | Add support for https
+  apt: pkg={{ item }} state=installed update_cache=yes cache_valid_time=3600
+  with_items:
+  - "apt-transport-https"
+  - "ca-certificates"
+
+- name: Add passnager repository
+  apt_repository: repo='deb https://oss-binaries.phusionpassenger.com/apt/passenger trusty main' state=present
+
+- name: Install nginx and passanger
+  apt: pkg={{ item }} state=present update_cache=yes
+  with_items:
+    - "nginx-extras"
+    - "passenger"
+
+- name: Update nginx.conf
+  template:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+  notify: nginx reload
+
+- name: Add virtualhost configuration
+  template:
+    src: virtualhost.conf
+    dest: /etc/nginx/sites-available/{{ item.server_name }}
+  with_items: virtual_hosts
+  notify: nginx reload
+
+- name: Disable virtualhosts
+  file:
+    path: /etc/nginx/sites-enabled/{{ item.server_name }}
+    state: absent
+  when: item.disabled is defined
+  with_items: virtual_hosts
+  notify: nginx reload
+
+- name: Enable virtualhosts
+  file:
+    src: /etc/nginx/sites-available/{{ item.server_name }}
+    dest: /etc/nginx/sites-enabled/{{ item.server_name }}
+    state: link
+  when: item.disabled is not defined
+  with_items: virtual_hosts
+  notify: nginx reload
+
+- name: Restart nginx
+  service: name=nginx state=restarted enabled=yes

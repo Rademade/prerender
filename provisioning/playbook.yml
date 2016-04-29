@@ -1,0 +1,46 @@
+---
+- name: Server configuration
+  hosts: all
+
+  vars:
+    # Locales
+    locale: 'en_US'
+    encoding: 'UTF-8'
+
+    # Ruby settings
+    rvm1_ruby: '2.3.0'
+    rvm1_gemset: 'prerender'
+    rvm1_rubies:
+      - '{{ rvm1_ruby }}'
+    rvm1_install_flags: '--auto-dotfiles --user-install'
+
+    # Project settings
+    project_user: 'prerender'
+
+    # NodeJS
+    nvm_env: system
+    nvm_version: v0.31.0
+    nvm_default_node_version: v5.10.1
+    nvm_node_versions:
+      - v5.10.1
+    nvm_global_packages:
+      - bower
+      - gulp
+
+    # Nginx settings
+    virtual_hosts:
+      - server_name: hellapay.com
+
+  roles:
+    - ansible-locales
+    - yatesr.timezone
+    - geerlingguy.git
+    - ansible-role-nvm
+    - ansible-role-mongodb
+    - rvm
+    - rvm-gemsets
+    - user-settings
+
+  tasks:
+    - name: Generate locales
+      locale_gen: name=en_US.UTF-8 state=present
