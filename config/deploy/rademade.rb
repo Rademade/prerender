@@ -1,6 +1,6 @@
-set :deploy_to, "/var/www/prerender"
+set :deploy_to, "/home/prerender/application-production"
 
 set :rvm_type,          :system
-set :rvm_ruby_version,  'ruby-2.1.5@prerender'
+set :rvm_ruby_version,  'ruby-2.3.0@prerender'
 
-server 'rademade.com', user: 'deploy', roles: %w{web app}
+server 'rademade.com', user: 'prerender', roles: %w{web app web}
