@@ -11,6 +11,8 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    capistrano-yarn (2.0.2)
+      capistrano (~> 3.0)
     colorize (0.7.7)
     i18n (0.7.0)
     net-scp (1.2.1)
@@ -29,3 +31,7 @@ DEPENDENCIES
   capistrano (~> 3.2)
   capistrano-bundler
   capistrano-rvm
+  capistrano-yarn (~> 2.0)
+
+BUNDLED WITH
+   1.16.0

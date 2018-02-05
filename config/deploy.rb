@@ -10,14 +10,6 @@ set :keep_releases, 2
 
 namespace :deploy do
 
-  task 'npm:install' do
-    on roles(:web) do
-      within release_path do
-        execute :npm, :install
-      end
-    end
-  end
-
   task 'app:restart' do
     on roles(:web) do
       within current_path do
@@ -27,7 +19,6 @@ namespace :deploy do
     end
   end
 
-  after :updated, 'deploy:npm:install'
   after :finishing, 'deploy:app:restart'
   after :finishing, 'deploy:cleanup'
 
