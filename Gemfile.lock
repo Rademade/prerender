@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    byebug (10.0.0)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
@@ -28,6 +29,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  byebug
   capistrano (~> 3.2)
   capistrano-bundler
   capistrano-rvm
