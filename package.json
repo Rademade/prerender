@@ -13,8 +13,8 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "forever": "^0.15.1",
-    "prerender": "^3.20.1",
-    "prerender-mongodb-cache": "https://github.com/brainshave/prerender-mongodb-cache.git"
+    "forever": "^0.15.3",
+    "prerender": "^4.0.0",
+    "prerender-mongodb-cache": "^0.0.2"
   }
 }
