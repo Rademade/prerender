@@ -12,7 +12,7 @@ server.use(prerender.sendPrerenderHeader());
 // server.use(prerender.whitelist());
 server.use(prerender.blacklist());
 // server.use(prerender.logger());
-server.use(prerender.removeScriptTags());
+// server.use(prerender.removeScriptTags());
 server.use(prerender.httpHeaders());
 server.use(require('prerender-mongodb-cache'));
 // server.use(prerender.inMemoryHtmlCache());
